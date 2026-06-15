@@ -104,8 +104,7 @@
     var d = document.createElement('div');
     d.className = 'cat-msg ' + (role === 'user' ? 'cat-user' : 'cat-bot');
     d.innerHTML = '<div class="cat-av">' + (role === 'user' ? 'You' : 'CAT') + '</div>' +
-                  '<div class="cat-bubble">' + text.replace(/
-/g, '<br>') + '</div>';
+                  '<div class="cat-bubble">' + text.replace(/\n/g, '<br>') + '</div>';
     chatEl.appendChild(d);
     chatEl.scrollTop = chatEl.scrollHeight;
   }
