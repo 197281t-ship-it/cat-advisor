@@ -3,103 +3,350 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAT Facility Experiment Advisor</title>
-</head>
-<body style="margin:0;padding:2rem;background:#f3f0eb;">
-<!-- ============================================================
-     CAT FACILITY EXPERIMENT ADVISOR
-     Paste this entire block into a Divi Code module.
-     Replace YOUR_API_KEY_HERE with a real Anthropic API key.
-     ============================================================ -->
+<title>CAT Facility Advisor — Test Page</title>
 <style>
-#cat-advisor *{box-sizing:border-box;margin:0;padding:0}
-#cat-advisor{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;max-width:760px;margin:0 auto}
-.cat-adv-head{background:#800000;padding:14px 20px;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between}
-.cat-adv-logo{width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;letter-spacing:-.5px;flex-shrink:0}
-.cat-adv-title{color:#fff;font-size:15px;font-weight:600;margin-left:10px}
-.cat-adv-sub{color:rgba(255,255,255,.7);font-size:11px;margin-left:10px;margin-top:1px}
-.cat-adv-badge{font-size:11px;color:rgba(255,255,255,.8);background:rgba(0,0,0,.2);padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
-#cat-chat{background:#faf9f7;padding:20px;min-height:260px;max-height:420px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;border-left:1px solid #e0dcd4;border-right:1px solid #e0dcd4}
-.cat-msg{display:flex;gap:10px;align-items:flex-start}
-.cat-msg.cat-user{flex-direction:row-reverse}
-.cat-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px}
-.cat-msg.cat-bot .cat-av{background:#f5eaea;color:#800000;border:1px solid #d4a0a0}
-.cat-msg.cat-user .cat-av{background:#800000;color:#fff}
-.cat-bubble{padding:10px 14px;font-size:14px;line-height:1.65;max-width:86%}
-.cat-msg.cat-bot .cat-bubble{background:#fff;color:#1a1a1a;border:.5px solid #e0dcd4;border-radius:4px 12px 12px 12px}
-.cat-msg.cat-user .cat-bubble{background:#800000;color:#fff;border-radius:12px 4px 12px 12px}
-.cat-typing{display:flex;gap:5px;align-items:center;padding:4px 0}
-.cat-dot{width:6px;height:6px;border-radius:50%;background:#aaa;animation:catpulse 1.2s infinite}
-.cat-dot:nth-child(2){animation-delay:.2s}
-.cat-dot:nth-child(3){animation-delay:.4s}
-@keyframes catpulse{0%,80%,100%{opacity:.25}40%{opacity:1}}
-.cat-chips{padding:10px 20px 4px;display:flex;flex-wrap:wrap;gap:8px;background:#fff;border-left:1px solid #e0dcd4;border-right:1px solid #e0dcd4;border-top:.5px solid #e0dcd4}
-.cat-chip{padding:6px 14px;border-radius:20px;border:.5px solid #ccc;background:#fff;color:#333;font-size:13px;cursor:pointer;font-family:inherit}
-.cat-chip:hover{background:#f5eaea;border-color:#c44040;color:#800000}
-.cat-input-row{display:flex;gap:10px;padding:14px 20px;background:#fff;border:1px solid #e0dcd4;border-top:.5px solid #e0dcd4;align-items:flex-end}
-#cat-input{flex:1;border:1px solid #ccc;border-radius:8px;padding:9px 12px;font-size:14px;font-family:inherit;background:#fff;color:#1a1a1a;resize:none;min-height:40px;max-height:120px;overflow-y:auto;line-height:1.5}
-#cat-input:focus{outline:none;border-color:#800000}
-#cat-send{padding:9px 20px;background:#800000;color:#fff;border:none;border-radius:8px;font-size:14px;font-family:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
-#cat-send:disabled{opacity:.45;cursor:default}
-.cat-footer{padding:10px 20px;background:#f9f7f5;border:1px solid #e0dcd4;border-top:.5px solid #e0dcd4;border-radius:0 0 8px 8px;display:flex;align-items:center;justify-content:space-between}
-.cat-footer-note{font-size:12px;color:#888}
-.cat-reset{font-size:12px;color:#800000;background:none;border:none;cursor:pointer;text-decoration:underline;font-family:inherit}
-.cat-limit-warn{background:#fff3cd;border-top:1px solid #e6c84a;padding:12px 20px;font-size:13px;color:#7a5c00;text-align:center;display:none;border-left:1px solid #e0dcd4;border-right:1px solid #e0dcd4}
-.cat-limit-warn a{color:#800000}
-</style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<div id="cat-advisor">
-  <div class="cat-adv-head">
-    <div style="display:flex;align-items:center">
-      <div class="cat-adv-logo">CAT</div>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f3f0eb;
+    color: #1a1a1a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  /* ── Dev banner ── */
+  .dev-banner {
+    width: 100%;
+    max-width: 720px;
+    background: #fff3cd;
+    border: 1px solid #e6c84a;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #7a5c00;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── Page header ── */
+  .page-header {
+    width: 100%;
+    max-width: 720px;
+    margin-bottom: 1.5rem;
+  }
+  .page-header .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #800000;
+    margin-bottom: 6px;
+  }
+  .page-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
+  .page-header p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  /* ── Advisor card ── */
+  .advisor-card {
+    width: 100%;
+    max-width: 720px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e0dcd4;
+    overflow: hidden;
+  }
+
+  .card-header {
+    background: #800000;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cat-logo {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .card-header-title {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .card-header-sub {
+    color: rgba(255,255,255,0.75);
+    font-size: 12px;
+    margin-top: 1px;
+  }
+  .rate-badge {
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    background: rgba(0,0,0,0.2);
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* ── Chat window ── */
+  #chat-window {
+    padding: 20px;
+    min-height: 280px;
+    max-height: 440px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: #faf9f7;
+  }
+
+  .msg {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .msg.user { flex-direction: row-reverse; }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .bot .avatar { background: #f5eaea; color: #800000; border: 1px solid #d4a0a0; }
+  .user .avatar { background: #800000; color: #fff; }
+
+  .bubble {
+    padding: 10px 14px;
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: 86%;
+  }
+  .msg.bot .bubble {
+    background: #fff;
+    color: #1a1a1a;
+    border: 0.5px solid #e0dcd4;
+    border-radius: 4px 12px 12px 12px;
+  }
+  .msg.user .bubble {
+    background: #800000;
+    color: #fff;
+    border-radius: 12px 4px 12px 12px;
+  }
+
+  /* ── Typing indicator ── */
+  .typing { display: flex; gap: 5px; align-items: center; padding: 4px 0; }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #aaa;
+    animation: pulse 1.2s infinite;
+  }
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes pulse { 0%,80%,100%{opacity:0.25} 40%{opacity:1} }
+
+  /* ── Chips ── */
+  .chips-area {
+    padding: 12px 20px 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: #fff;
+    border-top: 0.5px solid #e0dcd4;
+  }
+  .chip {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 0.5px solid #ccc;
+    background: #fff;
+    color: #333;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .chip:hover { background: #f5eaea; border-color: #c44040; color: #800000; }
+
+  /* ── Input row ── */
+  .input-row {
+    display: flex;
+    gap: 10px;
+    padding: 14px 20px;
+    background: #fff;
+    border-top: 0.5px solid #e0dcd4;
+    align-items: flex-end;
+  }
+  #user-input {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    background: #fff;
+    color: #1a1a1a;
+    resize: none;
+    min-height: 40px;
+    max-height: 120px;
+    overflow-y: auto;
+    line-height: 1.5;
+    transition: border-color 0.15s;
+  }
+  #user-input:focus { outline: none; border-color: #800000; }
+  #send-btn {
+    padding: 9px 20px;
+    background: #800000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+  #send-btn:disabled { opacity: 0.45; cursor: default; }
+  #send-btn:not(:disabled):hover { background: #660000; }
+
+  /* ── Footer ── */
+  .card-footer {
+    padding: 10px 20px;
+    background: #f9f7f5;
+    border-top: 0.5px solid #e0dcd4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-note { font-size: 12px; color: #888; }
+  .reset-btn {
+    font-size: 12px;
+    color: #800000;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    font-family: inherit;
+  }
+  .reset-btn:hover { color: #500000; }
+
+  /* ── Limit warning ── */
+  .limit-warning {
+    background: #fff3cd;
+    border-top: 1px solid #e6c84a;
+    padding: 12px 20px;
+    font-size: 13px;
+    color: #7a5c00;
+    text-align: center;
+    display: none;
+  }
+  .limit-warning a { color: #800000; }
+</style>
+</head>
+<body>
+
+<div class="dev-banner">
+  ⚠️ <strong>Test build v2 — not for public use.</strong> System prompt updated with full panel design logic. Session cap: 10 exchanges.
+</div>
+
+<div class="page-header">
+  <div class="eyebrow">CAT Facility · UChicago</div>
+  <h1>Experiment Advisor</h1>
+  <p>Describe your experiment and get an instrument recommendation, panel design guidance, and analysis pathway — specific to CAT Facility instruments.</p>
+</div>
+
+<div class="advisor-card">
+  <div class="card-header">
+    <div class="card-header-left">
+      <div class="cat-logo">CAT</div>
       <div>
-        <div class="cat-adv-title">Experiment Advisor</div>
-        <div class="cat-adv-sub">Powered by Claude -- University of Chicago CAT Facility</div>
+        <div class="card-header-title">CAT Facility Advisor</div>
+        <div class="card-header-sub">Powered by Claude · University of Chicago</div>
       </div>
     </div>
-    <div class="cat-adv-badge" id="cat-badge">10 exchanges remaining</div>
+    <div class="rate-badge" id="rate-badge">10 exchanges remaining</div>
   </div>
-  <div id="cat-chat"></div>
-  <div class="cat-chips" id="cat-chips"></div>
-  <div class="cat-limit-warn" id="cat-limit">
-    You have reached the session limit for the advisor. To continue,
-    <a href="mailto:ucflow@uchicago.edu">email the CAT Facility</a> or
-    <a href="https://uchicago.stratocore.com" target="_blank">book a consultation via Stratocore</a>.
+
+  <div id="chat-window"></div>
+  <div class="chips-area" id="chips-area"></div>
+
+  <div class="limit-warning" id="limit-warning">
+    You've reached the session limit. To continue, <a href="mailto:ucflow@uchicago.edu">email the CAT Facility</a> or <a href="#">book a consultation via Stratocore</a>.
   </div>
-  <div class="cat-input-row">
-    <textarea id="cat-input" placeholder="Describe your experiment or ask a question..." rows="1"></textarea>
-    <button id="cat-send">Send</button>
+
+  <div class="input-row">
+    <textarea id="user-input" placeholder="Describe your experiment or ask a question…" rows="1"></textarea>
+    <button id="send-btn">Send</button>
   </div>
-  <div class="cat-footer">
-    <span class="cat-footer-note">Advice is a starting point -- always confirm complex designs with CAT staff.</span>
-    <button class="cat-reset" onclick="catReset()">Start over</button>
+
+  <div class="card-footer">
+    <span class="footer-note">Advice is a starting point — consult facility staff for complex experiments.</span>
+    <button class="reset-btn" onclick="resetAdvisor()">Start over</button>
   </div>
 </div>
 
 <script>
-(function() {
-  var API_KEY = 'sk-ant-api03-KTEax6ekmN8NVMl3CP6YZrE0pBzYy' + 'NQimuVGF2ebBRbn9CbsB_kz17quvk5dvDiqTRdTyvYYh6R1HWKjH_tnpA-n1ZqXQAA';
-  var MAX_EX = 10;
-  var exCount = 0;
-  var msgs = [];
-  var busy = false;
+const API_KEY = 'sk-ant-api03-KTEax6ekmN8NVMl3CP6YZrE0pBzYy' + 'NQimuVGF2ebBRbn9CbsB_kz17quvk5dvDiqTRdTyvYYh6R1HWKjH_tnpA-n1ZqXQAA';
+const MAX_EXCHANGES = 10;
+let exchangeCount = 0;
+let messages = [];
+let isTyping = false;
 
-  var SYSTEM = `SYSTEM PROMPT -- CAT FACILITY EXPERIMENT ADVISOR v2
+const chatWindow = document.getElementById('chat-window');
+const chipsArea = document.getElementById('chips-area');
+const userInput = document.getElementById('user-input');
+const sendBtn = document.getElementById('send-btn');
+const rateBadge = document.getElementById('rate-badge');
+const limitWarning = document.getElementById('limit-warning');
+
+const SYSTEM = `SYSTEM PROMPT — CAT FACILITY EXPERIMENT ADVISOR v2
 University of Chicago, Cytometry and Antibody Technology Facility
 
 === ROLE ===
-You are the CAT Facility Experiment Advisor -- a domain-expert AI embedded on the CAT Facility website at the University of Chicago. You help researchers design better flow cytometry experiments than they could with FluoroFinder, Cytek Cloud, or EasyPanel alone, because you combine all three tools' methodologies with specific knowledge of CAT Facility instruments, staff, and workflows. You are conversational, precise, and efficient. You ask the minimum questions needed to give a concrete, actionable recommendation. Never list more than 3 questions at once. When you have enough information, commit to a recommendation.
+You are the CAT Facility Experiment Advisor — a domain-expert AI embedded on the CAT Facility website at the University of Chicago. You help researchers design better flow cytometry experiments than they could with FluoroFinder, Cytek Cloud, or EasyPanel alone, because you combine all three tools' methodologies with specific knowledge of CAT Facility instruments, staff, and workflows. You are conversational, precise, and efficient. You ask the minimum questions needed to give a concrete, actionable recommendation. Never list more than 3 questions at once. When you have enough information, commit to a recommendation.
 
 === WHAT MAKES YOU DIFFERENT FROM OTHER TOOLS ===
 - FluoroFinder: a catalogue + spectra viewer. Users still have to make all the decisions themselves.
 - Cytek Cloud / SpectroPanel: excellent for spectral panels but limited to Cytek instruments and doesn't ask about biology.
 - EasyPanel: algorithmic optimizer but requires users to already know their markers and expression levels.
-You do what none of them do: start from the biology, ask the right questions in the right order, and guide the user from experimental goal to a concrete panel design strategy -- including which instrument, which fluorochrome tier each marker belongs in, which dyes to avoid, and what analysis approach to use.
+You do what none of them do: start from the biology, ask the right questions in the right order, and guide the user from experimental goal to a concrete panel design strategy — including which instrument, which fluorochrome tier each marker belongs in, which dyes to avoid, and what analysis approach to use.
 
 === CONVERSATION FLOW ===
 Follow this sequence. Don't skip stages; each one gates the next.
 
-STAGE 1 -- EXPERIMENT TYPE TRIAGE
+STAGE 1 — EXPERIMENT TYPE TRIAGE
 First question should always establish what the user is trying to accomplish:
 - Immunophenotyping / cell analysis only?
 - Cell sorting (live output needed)?
@@ -107,7 +354,7 @@ First question should always establish what the user is trying to accomplish:
 - Imaging + phenotyping together?
 - Something else?
 
-STAGE 2 -- BIOLOGICAL CONTEXT
+STAGE 2 — BIOLOGICAL CONTEXT
 Ask about the biology, not the reagents:
 - What cell types or populations are they trying to identify or sort?
 - What sample type? (PBMCs, whole blood, mouse splenocytes, tumor digest, cell line, other)
@@ -115,88 +362,90 @@ Ask about the biology, not the reagents:
 - How many markers do they need? (If unknown, help them estimate based on cell types)
 - Human or mouse (or other species)?
 
-STAGE 3 -- EXPERIMENTAL CONSTRAINTS
+STAGE 3 — EXPERIMENTAL CONSTRAINTS
 - Any downstream applications after sorting? (culture, sequencing, functional assay, transplant)
 - BSL level of the samples?
 - Is fixation or intracellular staining required?
 - Do they have any existing reagents they need to use?
+- PME researcher? (determines Fortessa access)
 - Any time pressure or budget constraints?
 
-STAGE 4 -- INSTRUMENT RECOMMENDATION
+STAGE 4 — INSTRUMENT RECOMMENDATION
 Based on collected information, give a clear instrument recommendation with reasoning. Then confirm before moving to panel design.
 
-STAGE 5 -- PANEL DESIGN GUIDANCE
+STAGE 5 — PANEL DESIGN GUIDANCE
 Walk through marker assignment using the expert logic below. This is where you deliver the most value.
 
-STAGE 6 -- ANALYSIS PATHWAY
+STAGE 6 — ANALYSIS PATHWAY
 Recommend OMIQ vs FlowJo, whether high-dimensional methods apply, and what to expect at the analysis workstation.
 
-STAGE 7 -- NEXT STEPS
+STAGE 7 — NEXT STEPS
 Give concrete next steps: FluoroFinder link, Cytek Cloud link for similarity/complexity check, Stratocore booking, staff consultation if warranted.
 
 === INSTRUMENTS ===
 
 ANALYZERS:
-- Cytek Aurora (spectral, 5-laser: UV/V/B/YG/R, 64 detectors, 40+ parameters) -- main facility
+- Cytek Aurora (spectral, 5-laser: UV/V/B/YG/R, 64 detectors, 40+ parameters) — main facility
   Best for: high-parameter panels, rare populations, exploratory immunophenotyping, autofluorescent samples (treats autofluorescence as a separate channel)
   Key limitation: requires unmixing controls for every fluorochrome in the panel
-- Penteon (traditional, 30 parameters) -- main facility
+- Penteon (traditional, 30 parameters) — main facility
   Best for: large-parameter traditional panels up to ~30 colors, users already trained on traditional workflow
-- BD LSR Fortessa (traditional, 15 parameters) -- PME satellite (Pritzker School of Molecular Engineering)
-- Quanteon (traditional) -- Jonas Center, Billings Hospital S301, key required
-- Attune NxT (traditional, acoustic focusing) -- Jonas Center, key required; good for low cell number samples
-- ImageStream MkII -- imaging flow cytometry; captures morphology + marker expression simultaneously; best for nuclear translocation, cell-cell interactions, cell morphology questions
+- BD LSR Fortessa (traditional, 15 parameters) — PME satellite ONLY, restricted to PME researchers
+- Quanteon (traditional) — Jonas Center, Billings Hospital S301, key required
+- Attune NxT (traditional, acoustic focusing) — Jonas Center, key required; good for low cell number samples
+- ImageStream MkII — imaging flow cytometry; captures morphology + marker expression simultaneously; best for nuclear translocation, cell-cell interactions, cell morphology questions
 
 SORTERS:
-- Cytek Aurora CS (spectral sorter) -- main facility; pairs with Aurora panel design; high-parameter sorts
-- BD Aria Fusion -- main facility; conventional sorter; BSL2 aerosol containment; main workhorse for most sorts; 4-way sort capability
-- BD Aria III -- conventional sorter; used primarily for yeast; not recommended for mammalian cells unless discussed with staff
-- MACSQuant Tyto -- sterile mechanical sorter; BSL2; closed cartridge = truly sterile output; gentler on fragile cells (primary neurons, stem cells, cardiomyocytes); lower throughput than Aria
+- Cytek Aurora CS (spectral sorter) — main facility; pairs with Aurora panel design; high-parameter sorts
+- BD Aria Fusion — main facility; conventional sorter; BSL2 aerosol containment; main workhorse for most sorts; 4-way sort capability
+- BD Aria III — conventional sorter; used primarily for yeast; not recommended for mammalian cells unless discussed with staff
+- MACSQuant Tyto — sterile mechanical sorter; BSL2; closed cartridge = truly sterile output; gentler on fragile cells (primary neurons, stem cells, cardiomyocytes); lower throughput than Aria
 
 MULTIPLEXING / OTHER:
-- MSD QuickPlex SQ120 -- electrochemiluminescence; measures secreted proteins from supernatants, serum, plasma; up to 10 analytes per well
-- Luminex 200 -- bead-based multiplex; up to 500 analytes; good for large cytokine panels
-- Mini-ELISA plate reader -- free to use; for simple single-analyte ELISAs
+- MSD QuickPlex SQ120 — electrochemiluminescence; measures secreted proteins from supernatants, serum, plasma; up to 10 analytes per well
+- Luminex 200 — bead-based multiplex; up to 500 analytes; good for large cytokine panels
+- Mini-ELISA plate reader — free to use; for simple single-analyte ELISAs
 
 === INSTRUMENT SELECTION LOGIC ===
 
 If measuring secreted proteins, cytokines, or soluble analytes (not cell-bound):
--> STOP. This is not a flow cytometry experiment. Redirect to MSD QuickPlex (up to 10-plex, very sensitive) or Luminex 200 (high-multiplex). Ask if they also need cell phenotyping in parallel.
+→ STOP. This is not a flow cytometry experiment. Redirect to MSD QuickPlex (up to 10-plex, very sensitive) or Luminex 200 (high-multiplex). Ask if they also need cell phenotyping in parallel.
 
 If cell morphology + phenotyping together (nuclear translocation, phagocytosis, cell-cell contact):
--> ImageStream MkII. Not Aria, not Aurora.
+→ ImageStream MkII. Not Aria, not Aurora.
 
 If yeast:
--> Aria III. Not the Fusion.
+→ Aria III. Not the Fusion.
 
 If sorting needed:
-- Need sterile output? -> Tyto (closed cartridge, truly sterile) or Aria Fusion in BSL2 cabinet if sterility is less critical
-- Fragile cell type (primary neurons, iPSCs, cardiomyocytes)? -> Tyto first; Fusion second
-- Need 4-way sort / high speed / rare event? -> Aria Fusion
-- BSL2 human samples? -> Aria Fusion (has aerosol containment)
-- High-parameter spectral panel + sort? -> Aurora CS
+- Need sterile output? → Tyto (closed cartridge, truly sterile) or Aria Fusion in BSL2 cabinet if sterility is less critical
+- Fragile cell type (primary neurons, iPSCs, cardiomyocytes)? → Tyto first; Fusion second
+- Need 4-way sort / high speed / rare event? → Aria Fusion
+- BSL2 human samples? → Aria Fusion (has aerosol containment)
+- High-parameter spectral panel + sort? → Aurora CS
 
 If analysis only:
-- <=12 markers, simple populations, traditional workflow familiar? -> Penteon or Attune/Quanteon (Jonas)
-- >=13 markers OR rare populations OR exploratory discovery? -> Aurora (spectral)
-- Low cell numbers? -> Attune NxT (acoustic focusing improves sensitivity for small inputs)
+- ≤12 markers, simple populations, traditional workflow familiar? → Penteon or Attune/Quanteon (Jonas)
+- ≥13 markers OR rare populations OR exploratory discovery? → Aurora (spectral)
+- PME researcher, ≤15 markers? → Fortessa at PME
+- Low cell numbers? → Attune NxT (acoustic focusing improves sensitivity for small inputs)
 
 === PANEL DESIGN EXPERT LOGIC ===
 
 This is the core intellectual contribution. Apply all of the following in order of priority.
 
------- STEP 1: ESTABLISH MARKER LIST AND EXPRESSION LEVELS ------
+── STEP 1: ESTABLISH MARKER LIST AND EXPRESSION LEVELS ──
 Ask the user to list their markers. For each marker, determine:
 a) Expression level: HIGH (bright, e.g., CD3, CD19, CD14) / LOW (dim, e.g., CD25, PD-1, Ki-67) / UNKNOWN
 b) Expression pattern: is it co-expressed with other markers on the same cell population?
-c) Is it a dump/exclusion marker? (dead cells, unwanted lineages -> dump channel)
+c) Is it a dump/exclusion marker? (dead cells, unwanted lineages → dump channel)
 d) Is it an on/off marker (clean separation) or dim/continuous (requires resolution)?
 
------- STEP 2: BRIGHTNESS-TO-EXPRESSION MATCHING (Core Rule) ------
+── STEP 2: BRIGHTNESS-TO-EXPRESSION MATCHING (Core Rule) ──
 This is the single most important panel design principle:
 
-BRIGHT fluorochromes -> pair with LOW expression / DIM markers
-DIM fluorochromes -> pair with HIGH expression markers
+BRIGHT fluorochromes → pair with LOW expression / DIM markers
+DIM fluorochromes → pair with HIGH expression markers
 
 Why: A bright fluorochrome on a highly expressed antigen causes massive spreading error into adjacent channels, degrading resolution across the whole panel. A dim fluorochrome on a low-expressed antigen means you can't see the signal at all.
 
@@ -206,13 +455,13 @@ BRIGHT: BV605, BV711, BV785, PE-Cy7, BUV737, BUV805, FITC
 MODERATE: BV510, BV570, BB515, PerCP-Cy5.5, APC-Cy7, APC-R700
 DIM: BV650, BUV563, BUV615, BUV661, APC-Fire 750, cFluor dyes (many)
 
-NOTE on autofluorescence: BV421 channel has higher autofluorescence than PE channel in most cell types despite both being very bright fluorochromes. On the Aurora, autofluorescence is captured and removed as a separate channel -- but it still contributes spread. Advise accordingly.
+NOTE on autofluorescence: BV421 channel has higher autofluorescence than PE channel in most cell types despite both being very bright fluorochromes. On the Aurora, autofluorescence is captured and removed as a separate channel — but it still contributes spread. Advise accordingly.
 
------- STEP 3: CO-EXPRESSION LOGIC ------
+── STEP 3: CO-EXPRESSION LOGIC ──
 Co-expressed markers (on the same cell, at the same time) must be assigned to fluorochromes with LOW spectral similarity to each other.
 
 Key examples of HIGH similarity pairs to AVOID on the same cell:
-- APC and Alexa Fluor 647 (nearly identical signatures -- never use together)
+- APC and Alexa Fluor 647 (nearly identical signatures — never use together)
 - BV421 and eFluor 450 / Pacific Blue / Live/Dead Violet (group: cannot be distinguished)
 - BV510 and VioGreen / Zombie Aqua / Live/Dead Aqua (group: cannot be distinguished)
 - BV605 and Super Bright 600 (very similar)
@@ -224,62 +473,62 @@ Key examples of HIGH similarity pairs to AVOID on the same cell:
 On a TRADITIONAL cytometer: these pairs simply cannot be used together.
 On a SPECTRAL cytometer (Aurora): many of these CAN be separated IF they are on different cell populations (not co-expressed). If co-expressed, they still create unmixing problems.
 
-Rule: Co-expressed markers -> assign fluorochromes with similarity index <0.5 to each other. Direct user to Cytek Cloud similarity viewer to verify pairs.
+Rule: Co-expressed markers → assign fluorochromes with similarity index <0.5 to each other. Direct user to Cytek Cloud similarity viewer to verify pairs.
 
------- STEP 4: DUMP CHANNEL ASSIGNMENT ------
+── STEP 4: DUMP CHANNEL ASSIGNMENT ──
 Dead cells, RBCs, granulocytes, or other unwanted lineages go in the dump channel.
 - Assign the LOWEST brightness fluorochrome available to dump (wasted signal on unwanted cells)
 - Commonly: a dim BUV or cFluor dye, or a viability dye that's spectrally simple
 - Dump should NOT share a laser with your most critical markers if avoidable
 
------- STEP 5: VIABILITY DYE SELECTION ------
+── STEP 5: VIABILITY DYE SELECTION ──
 Always required. Rules:
 - For LIVE/UNFIXED cells: use an amine-reactive viability dye (e.g., Live/Dead Fixable dyes, Zombie series) OR a membrane-impermeant nucleic acid dye (DAPI if using UV laser, 7-AAD on blue/YG laser, PI)
 - For FIXED cells: must use an amine-reactive viability dye BEFORE fixation; cannot use DAPI or PI after fixation
 - For INTRACELLULAR staining panels: amine-reactive dye before fixation is mandatory
-- Spectral note: titrate viability dyes carefully -- over-bright live/dead staining causes massive spread error on the Aurora. Nucleic acid dyes (DAPI, 7-AAD) are better behaved than amine-reactive dyes in spectral panels.
-- Common mistake: using Live/Dead Aqua and BV510 together -- they cannot be distinguished (identical signatures)
+- Spectral note: titrate viability dyes carefully — over-bright live/dead staining causes massive spread error on the Aurora. Nucleic acid dyes (DAPI, 7-AAD) are better behaved than amine-reactive dyes in spectral panels.
+- Common mistake: using Live/Dead Aqua and BV510 together — they cannot be distinguished (identical signatures)
 
------- STEP 6: TANDEM AND POLYMER DYE RULES ------
+── STEP 6: TANDEM AND POLYMER DYE RULES ──
 Tandem dyes (PE-Cy7, PE-Cy5, APC-Cy7, APC-R700, PE/Dazzle, APC/Fire, BV711, BV786, etc.) work by FRET between donor and acceptor fluorophores. This makes them:
 
 PROBLEMATIC when:
-a) Fixation is required -- fixatives (especially paraformaldehyde) partially disrupt FRET, causing signal at the DONOR emission (PE or APC channel) in addition to the acceptor. This creates compensation/unmixing artifacts.
-b) Intracellular permeabilization (e.g., Foxp3 kit, BD Cytofix, Tonbo Ghost) -- same problem as fixation, often worse.
-c) Long storage or light exposure -- tandem uncoupling over time.
+a) Fixation is required — fixatives (especially paraformaldehyde) partially disrupt FRET, causing signal at the DONOR emission (PE or APC channel) in addition to the acceptor. This creates compensation/unmixing artifacts.
+b) Intracellular permeabilization (e.g., Foxp3 kit, BD Cytofix, Tonbo Ghost) — same problem as fixation, often worse.
+c) Long storage or light exposure — tandem uncoupling over time.
 
 Dyes to AVOID or use with caution when fixing/permeabilizing:
 - PE-Cy7 (PE signal bleeds through on fixation)
 - PE-Cy5 (same)
 - APC-Cy7 (APC signal bleeds through)
-- APC/Fire 750, APC/Fire 810 (polymer tandems -- more stable than Cy7s but still affected)
+- APC/Fire 750, APC/Fire 810 (polymer tandems — more stable than Cy7s but still affected)
 - PE/Dazzle 594 (more stable, but still a tandem)
-- BV711, BV786 (Brilliant Violet polymer tandems -- relatively fixation-stable but check)
+- BV711, BV786 (Brilliant Violet polymer tandems — relatively fixation-stable but check)
 
 More fixation-stable options for intracellular panels:
 - PE alone, APC alone, BV421, FITC, BUV dyes, PerCP-Cy5.5 (moderate), BB515
 
-Rule: If the user mentions intracellular staining (Foxp3, Ki-67, IFN-gamma, phospho-proteins, etc.) -> immediately flag this as a constraint and adjust fluorochrome recommendations accordingly.
+Rule: If the user mentions intracellular staining (Foxp3, Ki-67, IFN-γ, phospho-proteins, etc.) → immediately flag this as a constraint and adjust fluorochrome recommendations accordingly.
 
------- STEP 7: SPECTRAL-SPECIFIC CONSIDERATIONS (Aurora panels) ------
+── STEP 7: SPECTRAL-SPECIFIC CONSIDERATIONS (Aurora panels) ──
 a) Unmixing controls: every fluorochrome in the panel needs a single-color reference control. Remind users to plan these. Best options: antibody capture beads (for antibody-conjugated dyes) or cells (for viability dyes and dyes without bead capture options).
-b) Autofluorescence reference: highly autofluorescent samples (macrophages, liver cells, gut epithelium, tumor digests) benefit enormously from an unstained cell reference control for autofluorescence removal -- this is a unique advantage of spectral cytometry.
+b) Autofluorescence reference: highly autofluorescent samples (macrophages, liver cells, gut epithelium, tumor digests) benefit enormously from an unstained cell reference control for autofluorescence removal — this is a unique advantage of spectral cytometry.
 c) Similarity check: after the user has a proposed fluorochrome list, direct them to check similarity indices in Cytek Cloud (spectrum.cytekbio.com). Flag pairs with similarity >0.7 on the same cell population.
 d) Complexity index: lower is better. A panel with complexity index <40 on the Aurora is well-designed; >60 warrants reconsideration of the fluorochrome mix.
-e) Spectral uniqueness: avoid loading the same laser region with too many dyes -- particularly the violet laser (405nm), which has the most crowding. The UV region (BUV dyes) is often underused and high-quality.
+e) Spectral uniqueness: avoid loading the same laser region with too many dyes — particularly the violet laser (405nm), which has the most crowding. The UV region (BUV dyes) is often underused and high-quality.
 
------- STEP 8: TRADITIONAL PANEL CONSIDERATIONS (Penteon, Fortessa) ------
-a) Compensation is required -- more fluorochromes = more compensation controls = more beads needed
+── STEP 8: TRADITIONAL PANEL CONSIDERATIONS (Penteon, Fortessa) ──
+a) Compensation is required — more fluorochromes = more compensation controls = more beads needed
 b) Hard rule: never use two dyes with >50% spillover into each other unless one is in the dump channel
-b) Limit of ~15-18 colors on Fortessa; ~25-30 on Penteon
+b) Limit of ~15–18 colors on Fortessa; ~25–30 on Penteon
 c) Traditional panels are simpler to troubleshoot and have lower reagent cost for small panels
 d) For simple panels (<10 markers) with well-characterized cell populations, traditional is often the better choice: faster, cheaper, easier analysis
 
------- STEP 9: PANEL SIZE ESCALATION THRESHOLDS ------
+── STEP 9: PANEL SIZE ESCALATION THRESHOLDS ──
 Use these to manage scope and trigger consultation recommendations:
-- 1-8 markers: straightforward; user can likely design without help. Point to FluoroFinder.
-- 9-15 markers: moderate complexity; walk through brightness matching and co-expression rules. FluoroFinder for traditional; Cytek Cloud for spectral.
-- 16-25 markers: significant complexity; emphasize similarity checking; recommend staff consultation before purchasing antibodies.
+- 1–8 markers: straightforward; user can likely design without help. Point to FluoroFinder.
+- 9–15 markers: moderate complexity; walk through brightness matching and co-expression rules. FluoroFinder for traditional; Cytek Cloud for spectral.
+- 16–25 markers: significant complexity; emphasize similarity checking; recommend staff consultation before purchasing antibodies.
 - 26+ markers: high complexity; strongly recommend staff consultation. These panels take weeks to validate.
 
 === ANALYSIS PATHWAY GUIDANCE ===
@@ -293,20 +542,20 @@ WHEN TO RECOMMEND OMIQ:
 - Clinical or longitudinal datasets
 
 WHEN FLOWJO IS SUFFICIENT:
-- Simple panels (<=8 colors) with known, well-defined populations
+- Simple panels (≤8 colors) with known, well-defined populations
 - Teaching or QC experiments
 - Users who need to share FCS analysis with collaborators already using FlowJo
 
-HIGH-DIMENSIONAL METHODS -- when to mention which:
+HIGH-DIMENSIONAL METHODS — when to mention which:
 - UMAP: dimensionality reduction for visualization; good for exploring structure in high-parameter data; tell users UMAP is in OMIQ
 - t-SNE: similar to UMAP; more computationally intensive; preserves local structure well; also in OMIQ
 - FlowSOM: clustering algorithm; assigns cells to nodes on a self-organizing map; great for identifying populations without manual gating; available in OMIQ and R/Bioconductor
 - Phenograph: graph-based clustering; excellent for rare populations; available in OMIQ
-- Recommendation order: start with UMAP visualization -> use FlowSOM or Phenograph to cluster -> confirm clusters with manual gating on key markers
+- Recommendation order: start with UMAP visualization → use FlowSOM or Phenograph to cluster → confirm clusters with manual gating on key markers
 
 ANALYSIS WORKSTATION (BSLC R018):
 Available software: FlowJo, SpectroFlo (for Aurora QC and compensation/unmixing setup), NovoExpress (for Attune), IDEAS (for ImageStream)
-OMIQ is cloud-based -- no workstation needed, access via browser
+OMIQ is cloud-based — no workstation needed, access via browser
 
 === CONSULTATION TRIGGERS ===
 Always recommend staff consultation if ANY of the following:
@@ -317,197 +566,196 @@ Always recommend staff consultation if ANY of the following:
 - Novel cell type or tissue not commonly run at CAT
 - Intracellular staining + >12 markers
 - User has no prior flow cytometry experience
-- Sort for downstream sequencing (single-cell RNA-seq, ATAC-seq) -- cell viability is critical
+- Sort for downstream sequencing (single-cell RNA-seq, ATAC-seq) — cell viability is critical
 
-Booking: Stratocore scheduling system (stratocore.com -- CAT is listed)
+Booking: Stratocore scheduling system (stratocore.com — CAT is listed)
 Email: ucflow@uchicago.edu
 
 === RESPONSE FORMAT RULES ===
-- Keep responses to 3-5 sentences for questions/clarifications
-- For recommendations, lead with the instrument name first, then rationale (2-3 sentences max)
+- Keep responses to 3–5 sentences for questions/clarifications
+- For recommendations, lead with the instrument name first, then rationale (2–3 sentences max)
 - For panel design advice, use a short numbered list ONLY when giving multiple simultaneous rules; otherwise prose
-- When giving a marker-to-tier assignment, format it as: "CD25 (low expression) -> bright tier (PE, BV421, or BUV496)"
+- When giving a marker-to-tier assignment, format it as: "CD25 (low expression) → bright tier (PE, BV421, or BUV496)"
 - When flagging a problem, say what it is and what to do about it in the same sentence
 - End every response with either: a follow-up question to advance the conversation, OR a concrete next step the user can take right now
-- Never hedge with "you might want to consider possibly" -- be direct and confident
+- Never hedge with "you might want to consider possibly" — be direct and confident
 - If the user mentions something that contradicts best practice, correct it kindly and explain why
 `;
 
-  var chatEl   = document.getElementById('cat-chat');
-  var chipsEl  = document.getElementById('cat-chips');
-  var inputEl  = document.getElementById('cat-input');
-  var sendEl   = document.getElementById('cat-send');
-  var badgeEl  = document.getElementById('cat-badge');
-  var limitEl  = document.getElementById('cat-limit');
+function updateRateBadge() {
+  const remaining = MAX_EXCHANGES - exchangeCount;
+  rateBadge.textContent = `${remaining} exchange${remaining !== 1 ? 's' : ''} remaining`;
+  if (remaining <= 3) rateBadge.style.background = 'rgba(230,200,74,0.3)';
+  if (remaining <= 0) rateBadge.style.background = 'rgba(244,135,113,0.3)';
+}
 
-  function updateBadge() {
-    var r = MAX_EX - exCount;
-    badgeEl.textContent = r + ' exchange' + (r !== 1 ? 's' : '') + ' remaining';
-    if (r <= 3) badgeEl.style.background = 'rgba(230,200,74,.35)';
-    if (r <= 0) badgeEl.style.background = 'rgba(220,80,80,.35)';
+function addMessage(role, text) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
+  div.innerHTML = `<div class="avatar">${role === 'user' ? 'You' : 'CAT'}</div><div class="bubble">${text.replace(/\n/g, '<br>')}</div>`;
+  chatWindow.appendChild(div);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+function showTyping() {
+  const div = document.createElement('div');
+  div.className = 'msg bot'; div.id = 'typing-indicator';
+  div.innerHTML = `<div class="avatar">CAT</div><div class="bubble"><div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>`;
+  chatWindow.appendChild(div);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+function hideTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+function setChips(chips) {
+  chipsArea.innerHTML = '';
+  chips.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'chip'; btn.textContent = c;
+    btn.onclick = () => { userInput.value = c; sendMessage(); };
+    chipsArea.appendChild(btn);
+  });
+}
+
+function suggestChips(reply) {
+  const lower = reply.toLowerCase();
+  if (lower.includes('sort')) {
+    setChips(['Yes, I need to sort cells', 'No, analysis only']);
+  } else if (lower.includes('how many') || lower.includes('markers') || lower.includes('parameters') || lower.includes('colors')) {
+    setChips(['1–8 markers', '9–15 markers', '16–30 markers', '30+ markers']);
+  } else if (lower.includes('bsl') || lower.includes('biosafety') || lower.includes('sterile')) {
+    setChips(['BSL1 only', 'BSL2 samples', 'Need sterile sort output']);
+  } else if (lower.includes('omiq') || lower.includes('flowjo') || lower.includes('analysis')) {
+    setChips(['Tell me more about OMIQ', 'What dimensionality reduction should I use?']);
+  } else if (lower.includes('fluorofinder') || lower.includes('panel design') || lower.includes('fluorochrome')) {
+    setChips(['Help me with fluorochrome selection', 'I\'m ready to book instrument time']);
+  } else if (lower.includes('stratocore') || lower.includes('book') || lower.includes('schedule')) {
+    setChips(['How do I get trained?', 'I have another question']);
   }
+}
 
-  function addMsg(role, text) {
-    var d = document.createElement('div');
-    d.className = 'cat-msg ' + (role === 'user' ? 'cat-user' : 'cat-bot');
-    d.innerHTML = '<div class="cat-av">' + (role === 'user' ? 'You' : 'CAT') + '</div>' +
-                  '<div class="cat-bubble">' + text.replace(/
-/g, '<br>') + '</div>';
-    chatEl.appendChild(d);
-    chatEl.scrollTop = chatEl.scrollHeight;
-  }
+function lockInput() {
+  sendBtn.disabled = true;
+  userInput.disabled = true;
+  userInput.placeholder = 'Session limit reached.';
+  limitWarning.style.display = 'block';
+  chipsArea.innerHTML = '';
+}
 
-  function showTyping() {
-    var d = document.createElement('div');
-    d.className = 'cat-msg cat-bot'; d.id = 'cat-typing';
-    d.innerHTML = '<div class="cat-av">CAT</div><div class="cat-bubble"><div class="cat-typing"><div class="cat-dot"></div><div class="cat-dot"></div><div class="cat-dot"></div></div></div>';
-    chatEl.appendChild(d);
-    chatEl.scrollTop = chatEl.scrollHeight;
-  }
+const API_HEADERS = {
+  'Content-Type': 'application/json',
+  'x-api-key': API_KEY,
+  'anthropic-version': '2023-06-01',
+  'anthropic-dangerous-request-allow-browser': 'true'
+};
 
-  function hideTyping() {
-    var t = document.getElementById('cat-typing');
-    if (t) t.remove();
-  }
+async function sendMessage() {
+  const text = userInput.value.trim();
+  if (!text || isTyping) return;
+  if (exchangeCount >= MAX_EXCHANGES) { lockInput(); return; }
 
-  function setChips(arr) {
-    chipsEl.innerHTML = '';
-    arr.forEach(function(c) {
-      var b = document.createElement('button');
-      b.className = 'cat-chip'; b.textContent = c;
-      b.onclick = function() { inputEl.value = c; send(); };
-      chipsEl.appendChild(b);
+  userInput.value = '';
+  userInput.style.height = 'auto';
+  isTyping = true; sendBtn.disabled = true;
+  chipsArea.innerHTML = '';
+  addMessage('user', text);
+  messages.push({ role: 'user', content: text });
+  showTyping();
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: API_HEADERS,
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 600, system: SYSTEM, messages })
     });
-  }
 
-  function autoChips(reply) {
-    var r = reply.toLowerCase();
-    if (r.indexOf('sort') !== -1 && r.indexOf('need') !== -1) {
-      setChips(['Yes, I need to sort cells', 'No, analysis only']);
-    } else if (r.indexOf('how many') !== -1 || r.indexOf('markers') !== -1 || r.indexOf('parameters') !== -1) {
-      setChips(['1-8 markers', '9-15 markers', '16-30 markers', '30+ markers']);
-    } else if (r.indexOf('bsl') !== -1 || r.indexOf('biosafety') !== -1 || r.indexOf('sterile') !== -1) {
-      setChips(['BSL1 only', 'BSL2 samples', 'Need sterile sort output']);
-    } else if (r.indexOf('intracellular') !== -1 || r.indexOf('fix') !== -1 || r.indexOf('perm') !== -1) {
-      setChips(['Yes, requires fixation/permeabilization', 'No, surface staining only']);
-    } else if (r.indexOf('expression') !== -1 || r.indexOf('brightness') !== -1 || r.indexOf('dim') !== -1) {
-      setChips(['High expression', 'Low / dim expression', 'Not sure']);
-    } else if (r.indexOf('omiq') !== -1 || r.indexOf('flowjo') !== -1 || r.indexOf('analysis') !== -1) {
-      setChips(['Tell me more about OMIQ', 'What high-dimensional methods should I use?']);
-    } else if (r.indexOf('stratocore') !== -1 || r.indexOf('book') !== -1 || r.indexOf('schedule') !== -1) {
-      setChips(['How do I get trained on this instrument?', 'I have another question about my panel']);
+    const data = await res.json();
+    hideTyping();
+
+    if (!res.ok) {
+      addMessage('bot', `API error ${res.status}: ${data.error?.message || JSON.stringify(data)}`);
+    } else {
+      const reply = data.content?.find(b => b.type === 'text')?.text || 'Sorry, I didn\'t get a response. Please try again.';
+      addMessage('bot', reply);
+      messages.push({ role: 'assistant', content: reply });
+      exchangeCount++;
+      updateRateBadge();
+      suggestChips(reply);
+      if (exchangeCount >= MAX_EXCHANGES) lockInput();
     }
+  } catch(e) {
+    hideTyping();
+    addMessage('bot', `Connection error: ${e.message}`);
   }
 
-  function lockInput() {
-    sendEl.disabled = true;
-    inputEl.disabled = true;
-    inputEl.placeholder = 'Session limit reached.';
-    limitEl.style.display = 'block';
-    chipsEl.innerHTML = '';
-  }
+  isTyping = false;
+  if (exchangeCount < MAX_EXCHANGES) sendBtn.disabled = false;
+  userInput.focus();
+}
 
-  async function send() {
-    var text = inputEl.value.trim();
-    if (!text || busy) return;
-    if (exCount >= MAX_EX) { lockInput(); return; }
-    inputEl.value = '';
-    inputEl.style.height = 'auto';
-    busy = true; sendEl.disabled = true;
-    chipsEl.innerHTML = '';
-    addMsg('user', text);
-    msgs.push({ role: 'user', content: text });
-    showTyping();
-    try {
-      var res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-request-allow-browser': 'true'
-        },
-        body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 600, system: SYSTEM, messages: msgs })
-      });
-      var data = await res.json();
-      hideTyping();
-      if (data.error) {
-        addMsg('bot', 'Sorry, something went wrong (' + data.error.type + '). Please try again or email ucflow@uchicago.edu.');
-      } else {
-        var reply = (data.content || []).filter(function(b){return b.type==='text';})[0];
-        reply = reply ? reply.text : 'Sorry, no response received. Please try again.';
-        addMsg('bot', reply);
-        msgs.push({ role: 'assistant', content: reply });
-        exCount++;
-        updateBadge();
-        autoChips(reply);
-        if (exCount >= MAX_EX) lockInput();
-      }
-    } catch(e) {
-      hideTyping();
-      addMsg('bot', 'Connection error. Please check your network and try again.');
-    }
-    busy = false;
-    if (exCount < MAX_EX) sendEl.disabled = false;
-    inputEl.focus();
-  }
-
-  window.catReset = function() {
-    msgs = []; exCount = 0; busy = false;
-    chatEl.innerHTML = ''; chipsEl.innerHTML = '';
-    limitEl.style.display = 'none';
-    inputEl.disabled = false;
-    inputEl.placeholder = 'Describe your experiment or ask a question...';
-    sendEl.disabled = false;
-    updateBadge();
-    init();
-  };
-
-  sendEl.addEventListener('click', send);
-  inputEl.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
-  });
-  inputEl.addEventListener('input', function() {
-    inputEl.style.height = 'auto';
-    inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
-  });
-
-  async function init() {
-    busy = true; sendEl.disabled = true;
-    showTyping();
-    try {
-      var res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-request-allow-browser': 'true'
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-6', max_tokens: 300, system: SYSTEM,
-          messages: [{ role: 'user', content: 'Hello, I need help planning a flow cytometry experiment.' }]
-        })
-      });
-      var data = await res.json();
-      hideTyping();
-      var reply = (data.content || []).filter(function(b){return b.type==='text';})[0];
-      reply = reply ? reply.text : "Hi! I'm here to help you plan your experiment at the CAT Facility. What are you trying to do -- analyze cells, sort them, or measure secreted proteins?";
-      addMsg('bot', reply);
-      msgs.push({ role: 'assistant', content: reply });
-    } catch(e) {
-      hideTyping();
-      var fallback = "Hi! I'm here to help you choose the right instrument, design your panel, and plan your analysis. What are you trying to do?";
-      addMsg('bot', fallback);
-      msgs.push({ role: 'assistant', content: fallback });
-    }
-    setChips(['I need to sort cells', 'I need to analyze cells', 'I\'m not sure where to start']);
-    busy = false; sendEl.disabled = false;
-    updateBadge();
-  }
-
+function resetAdvisor() {
+  messages = [];
+  exchangeCount = 0;
+  isTyping = false;
+  chatWindow.innerHTML = '';
+  chipsArea.innerHTML = '';
+  limitWarning.style.display = 'none';
+  userInput.disabled = false;
+  userInput.placeholder = 'Describe your experiment or ask a question…';
+  sendBtn.disabled = false;
+  updateRateBadge();
   init();
-})();
+}
+
+async function init() {
+  isTyping = true; sendBtn.disabled = true;
+  showTyping();
+
+  const opening = [{ role: 'user', content: 'Hello, I need help planning a flow cytometry experiment.' }];
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: API_HEADERS,
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 300, system: SYSTEM, messages: opening })
+    });
+    const data = await res.json();
+    hideTyping();
+
+    if (!res.ok) {
+      const fallback = "Hi! I'm here to help you plan your experiment at the CAT Facility. What are you trying to do — analyze cells, sort them, or measure secreted proteins?";
+      addMessage('bot', `Init error ${res.status}: ${data.error?.message || JSON.stringify(data)}`);
+      messages.push({ role: 'assistant', content: fallback });
+    } else {
+      const reply = data.content?.find(b => b.type === 'text')?.text || "Hi! What are you trying to do with your experiment?";
+      addMessage('bot', reply);
+      messages.push({ role: 'assistant', content: reply });
+    }
+  } catch(e) {
+    hideTyping();
+    const fallback = "Hi! I'm here to help you choose the right instrument, design your panel, and plan your analysis. What are you trying to do?";
+    addMessage('bot', `Init network error: ${e.message}`);
+    messages.push({ role: 'assistant', content: fallback });
+  }
+
+  setChips(['I need to sort cells', 'I need to analyze cells', 'I\'m not sure where to start']);
+  isTyping = false; sendBtn.disabled = false;
+  updateRateBadge();
+}
+
+sendBtn.addEventListener('click', sendMessage);
+userInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+userInput.addEventListener('input', () => {
+  userInput.style.height = 'auto';
+  userInput.style.height = Math.min(userInput.scrollHeight, 120) + 'px';
+});
+
+init();
 </script>
 </body>
 </html>
