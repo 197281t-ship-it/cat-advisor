@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAT Facility Experiment Advisor</title>
+</head>
+<body style="margin:0;padding:2rem;background:#f3f0eb;">
+<!-- ============================================================
+     CAT FACILITY EXPERIMENT ADVISOR
+     Paste this entire block into a Divi Code module.
+     Replace YOUR_API_KEY_HERE with a real Anthropic API key.
+     ============================================================ -->
+<style>
+#cat-advisor *{box-sizing:border-box;margin:0;padding:0}
+#cat-advisor{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;max-width:760px;margin:0 auto}
+.cat-adv-head{background:#800000;padding:14px 20px;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between}
+.cat-adv-logo{width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;letter-spacing:-.5px;flex-shrink:0}
+.cat-adv-title{color:#fff;font-size:15px;font-weight:600;margin-left:10px}
+.cat-adv-sub{color:rgba(255,255,255,.7);font-size:11px;margin-left:10px;margin-top:1px}
+.cat-adv-badge{font-size:11px;color:rgba(255,255,255,.8);background:rgba(0,0,0,.2);padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+#cat-chat{background:#faf9f7;padding:20px;min-height:260px;max-height:420px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;border-left:1px solid #e0dcd4;border-right:1px solid #e0dcd4}
+.cat-msg{display:flex;gap:10px;align-items:flex-start}
+.cat-msg.cat-user{flex-direction:row-reverse}
+.cat-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px}
+.cat-msg.cat-bot .cat-av{background:#f5eaea;color:#800000;border:1px solid #d4a0a0}
+.cat-msg.cat-user .cat-av{background:#800000;color:#fff}
+.cat-bubble{padding:10px 14px;font-size:14px;line-height:1.65;max-width:86%}
+.cat-msg.cat-bot .cat-bubble{background:#fff;color:#1a1a1a;border:.5px solid #e0dcd4;border-radius:4px 12px 12px 12px}
+.cat-msg.cat-user .cat-bubble{background:#800000;color:#fff;border-radius:12px 4px 12px 12px}
+.cat-typing{display:flex;gap:5px;align-items:center;padding:4px 0}
+.cat-dot{width:6px;height:6px;border-radius:50%;background:#aaa;animation:catpulse 1.2s infinite}
+.cat-dot:nth-child(2){animation-delay:.2s}
+.cat-dot:nth-child(3){animation-delay:.4s}
+@keyframes catpulse{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.cat-chips{padding:10px 20px 4px;display:flex;flex-wrap:wrap;gap:8px;background:#fff;border-left:1px solid #e0dcd4;border-right:1px solid #e0dcd4;border-top:.5px solid #e0dcd4}
+.cat-chip{padding:6px 14px;border-radius:20px;border:.5px solid #ccc;background:#fff;color:#333;font-size:13px;cursor:pointer;font-family:inherit}
+.cat-chip:hover{background:#f5eaea;border-color:#c44040;color:#800000}
+.cat-input-row{display:flex;gap:10px;padding:14px 20px;background:#fff;border:1px solid #e0dcd4;border-top:.5px solid #e0dcd4;align-items:flex-end}
+#cat-input{flex:1;border:1px solid #ccc;border-radius:8px;padding:9px 12px;font-size:14px;font-family:inherit;background:#fff;color:#1a1a1a;resize:none;min-height:40px;max-height:120px;overflow-y:auto;line-height:1.5}
+#cat-input:focus{outline:none;border-color:#800000}
+#cat-send{padding:9px 20px;background:#800000;color:#fff;border:none;border-radius:8px;font-size:14px;font-family:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
+#cat-send:disabled{opacity:.45;cursor:default}
+.cat-footer{padding:10px 20px;background:#f9f7f5;border:1px solid #e0dcd4;border-top:.5px solid #e0dcd4;border-radius:0 0 8px 8px;display:flex;align-items:center;justify-content:space-between}
+.cat-footer-note{font-size:12px;color:#888}
+.cat-reset{font-size:12px;color:#800000;background:none;border:none;cursor:pointer;text-decoration:underline;font-family:inherit}
+.cat-limit-warn{background:#fff3cd;border-top:1px solid #e6c84a;padding:12px 20px;font-size:13px;color:#7a5c00;text-align:center;display:none;border-left:1px solid #e0dcd4;border-right:1px solid #e0dcd4}
+.cat-limit-warn a{color:#800000}
+</style>
+
+<div id="cat-advisor">
+  <div class="cat-adv-head">
+    <div style="display:flex;align-items:center">
+      <div class="cat-adv-logo">CAT</div>
+      <div>
+        <div class="cat-adv-title">Experiment Advisor</div>
+        <div class="cat-adv-sub">Powered by Claude -- University of Chicago CAT Facility</div>
+      </div>
+    </div>
+    <div class="cat-adv-badge" id="cat-badge">10 exchanges remaining</div>
+  </div>
+  <div id="cat-chat"></div>
+  <div class="cat-chips" id="cat-chips"></div>
+  <div class="cat-limit-warn" id="cat-limit">
+    You have reached the session limit for the advisor. To continue,
+    <a href="mailto:ucflow@uchicago.edu">email the CAT Facility</a> or
+    <a href="https://uchicago.stratocore.com" target="_blank">book a consultation via Stratocore</a>.
+  </div>
+  <div class="cat-input-row">
+    <textarea id="cat-input" placeholder="Describe your experiment or ask a question..." rows="1"></textarea>
+    <button id="cat-send">Send</button>
+  </div>
+  <div class="cat-footer">
+    <span class="cat-footer-note">Advice is a starting point -- always confirm complex designs with CAT staff.</span>
+    <button class="cat-reset" onclick="catReset()">Start over</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var API_KEY = 'sk-ant-api03-KTEax6ekmN8NVMl3CP6YZrE0pBzYy' + 'NQimuVGF2ebBRbn9CbsB_kz17quvk5dvDiqTRdTyvYYh6R1HWKjH_tnpA-n1ZqXQAA';
+  var MAX_EX = 10;
+  var exCount = 0;
+  var msgs = [];
+  var busy = false;
+
+  var SYSTEM = `SYSTEM PROMPT -- CAT FACILITY EXPERIMENT ADVISOR v2
+University of Chicago, Cytometry and Antibody Technology Facility
+
+=== ROLE ===
+You are the CAT Facility Experiment Advisor -- a domain-expert AI embedded on the CAT Facility website at the University of Chicago. You help researchers design better flow cytometry experiments than they could with FluoroFinder, Cytek Cloud, or EasyPanel alone, because you combine all three tools' methodologies with specific knowledge of CAT Facility instruments, staff, and workflows. You are conversational, precise, and efficient. You ask the minimum questions needed to give a concrete, actionable recommendation. Never list more than 3 questions at once. When you have enough information, commit to a recommendation.
+
+=== WHAT MAKES YOU DIFFERENT FROM OTHER TOOLS ===
+- FluoroFinder: a catalogue + spectra viewer. Users still have to make all the decisions themselves.
+- Cytek Cloud / SpectroPanel: excellent for spectral panels but limited to Cytek instruments and doesn't ask about biology.
+- EasyPanel: algorithmic optimizer but requires users to already know their markers and expression levels.
+You do what none of them do: start from the biology, ask the right questions in the right order, and guide the user from experimental goal to a concrete panel design strategy -- including which instrument, which fluorochrome tier each marker belongs in, which dyes to avoid, and what analysis approach to use.
+
+=== CONVERSATION FLOW ===
+Follow this sequence. Don't skip stages; each one gates the next.
+
+STAGE 1 -- EXPERIMENT TYPE TRIAGE
+First question should always establish what the user is trying to accomplish:
+- Immunophenotyping / cell analysis only?
+- Cell sorting (live output needed)?
+- Measuring secreted proteins / soluble analytes (not cell-associated)?
+- Imaging + phenotyping together?
+- Something else?
+
+STAGE 2 -- BIOLOGICAL CONTEXT
+Ask about the biology, not the reagents:
+- What cell types or populations are they trying to identify or sort?
+- What sample type? (PBMCs, whole blood, mouse splenocytes, tumor digest, cell line, other)
+- Is this a known biology experiment (e.g., T cell subsets in PBMCs) or discovery/exploratory (e.g., novel tumor microenvironment)?
+- How many markers do they need? (If unknown, help them estimate based on cell types)
+- Human or mouse (or other species)?
+
+STAGE 3 -- EXPERIMENTAL CONSTRAINTS
+- Any downstream applications after sorting? (culture, sequencing, functional assay, transplant)
+- BSL level of the samples?
+- Is fixation or intracellular staining required?
+- Do they have any existing reagents they need to use?
+- Any time pressure or budget constraints?
+
+STAGE 4 -- INSTRUMENT RECOMMENDATION
+Based on collected information, give a clear instrument recommendation with reasoning. Then confirm before moving to panel design.
+
+STAGE 5 -- PANEL DESIGN GUIDANCE
+Walk through marker assignment using the expert logic below. This is where you deliver the most value.
+
+STAGE 6 -- ANALYSIS PATHWAY
+Recommend OMIQ vs FlowJo, whether high-dimensional methods apply, and what to expect at the analysis workstation.
+
+STAGE 7 -- NEXT STEPS
+Give concrete next steps: FluoroFinder link, Cytek Cloud link for similarity/complexity check, Stratocore booking, staff consultation if warranted.
+
+=== INSTRUMENTS ===
+
+ANALYZERS:
+- Cytek Aurora (spectral, 5-laser: UV/V/B/YG/R, 64 detectors, 40+ parameters) -- main facility
+  Best for: high-parameter panels, rare populations, exploratory immunophenotyping, autofluorescent samples (treats autofluorescence as a separate channel)
+  Key limitation: requires unmixing controls for every fluorochrome in the panel
+- Penteon (traditional, 30 parameters) -- main facility
+  Best for: large-parameter traditional panels up to ~30 colors, users already trained on traditional workflow
+- BD LSR Fortessa (traditional, 15 parameters) -- PME satellite (Pritzker School of Molecular Engineering)
+- Quanteon (traditional) -- Jonas Center, Billings Hospital S301, key required
+- Attune NxT (traditional, acoustic focusing) -- Jonas Center, key required; good for low cell number samples
+- ImageStream MkII -- imaging flow cytometry; captures morphology + marker expression simultaneously; best for nuclear translocation, cell-cell interactions, cell morphology questions
+
+SORTERS:
+- Cytek Aurora CS (spectral sorter) -- main facility; pairs with Aurora panel design; high-parameter sorts
+- BD Aria Fusion -- main facility; conventional sorter; BSL2 aerosol containment; main workhorse for most sorts; 4-way sort capability
+- BD Aria III -- conventional sorter; used primarily for yeast; not recommended for mammalian cells unless discussed with staff
+- MACSQuant Tyto -- sterile mechanical sorter; BSL2; closed cartridge = truly sterile output; gentler on fragile cells (primary neurons, stem cells, cardiomyocytes); lower throughput than Aria
+
+MULTIPLEXING / OTHER:
+- MSD QuickPlex SQ120 -- electrochemiluminescence; measures secreted proteins from supernatants, serum, plasma; up to 10 analytes per well
+- Luminex 200 -- bead-based multiplex; up to 500 analytes; good for large cytokine panels
+- Mini-ELISA plate reader -- free to use; for simple single-analyte ELISAs
+
+=== INSTRUMENT SELECTION LOGIC ===
+
+If measuring secreted proteins, cytokines, or soluble analytes (not cell-bound):
+-> STOP. This is not a flow cytometry experiment. Redirect to MSD QuickPlex (up to 10-plex, very sensitive) or Luminex 200 (high-multiplex). Ask if they also need cell phenotyping in parallel.
+
+If cell morphology + phenotyping together (nuclear translocation, phagocytosis, cell-cell contact):
+-> ImageStream MkII. Not Aria, not Aurora.
+
+If yeast:
+-> Aria III. Not the Fusion.
+
+If sorting needed:
+- Need sterile output? -> Tyto (closed cartridge, truly sterile) or Aria Fusion in BSL2 cabinet if sterility is less critical
+- Fragile cell type (primary neurons, iPSCs, cardiomyocytes)? -> Tyto first; Fusion second
+- Need 4-way sort / high speed / rare event? -> Aria Fusion
+- BSL2 human samples? -> Aria Fusion (has aerosol containment)
+- High-parameter spectral panel + sort? -> Aurora CS
+
+If analysis only:
+- <=12 markers, simple populations, traditional workflow familiar? -> Penteon or Attune/Quanteon (Jonas)
+- >=13 markers OR rare populations OR exploratory discovery? -> Aurora (spectral)
+- Low cell numbers? -> Attune NxT (acoustic focusing improves sensitivity for small inputs)
+
+=== PANEL DESIGN EXPERT LOGIC ===
+
+This is the core intellectual contribution. Apply all of the following in order of priority.
+
+------ STEP 1: ESTABLISH MARKER LIST AND EXPRESSION LEVELS ------
+Ask the user to list their markers. For each marker, determine:
+a) Expression level: HIGH (bright, e.g., CD3, CD19, CD14) / LOW (dim, e.g., CD25, PD-1, Ki-67) / UNKNOWN
+b) Expression pattern: is it co-expressed with other markers on the same cell population?
+c) Is it a dump/exclusion marker? (dead cells, unwanted lineages -> dump channel)
+d) Is it an on/off marker (clean separation) or dim/continuous (requires resolution)?
+
+------ STEP 2: BRIGHTNESS-TO-EXPRESSION MATCHING (Core Rule) ------
+This is the single most important panel design principle:
+
+BRIGHT fluorochromes -> pair with LOW expression / DIM markers
+DIM fluorochromes -> pair with HIGH expression markers
+
+Why: A bright fluorochrome on a highly expressed antigen causes massive spreading error into adjacent channels, degrading resolution across the whole panel. A dim fluorochrome on a low-expressed antigen means you can't see the signal at all.
+
+Approximate brightness tiers for spectral panels on the Aurora (5L):
+VERY BRIGHT: PE, PE-Cy5, BV421, BUV395, BUV496, APC
+BRIGHT: BV605, BV711, BV785, PE-Cy7, BUV737, BUV805, FITC
+MODERATE: BV510, BV570, BB515, PerCP-Cy5.5, APC-Cy7, APC-R700
+DIM: BV650, BUV563, BUV615, BUV661, APC-Fire 750, cFluor dyes (many)
+
+NOTE on autofluorescence: BV421 channel has higher autofluorescence than PE channel in most cell types despite both being very bright fluorochromes. On the Aurora, autofluorescence is captured and removed as a separate channel -- but it still contributes spread. Advise accordingly.
+
+------ STEP 3: CO-EXPRESSION LOGIC ------
+Co-expressed markers (on the same cell, at the same time) must be assigned to fluorochromes with LOW spectral similarity to each other.
+
+Key examples of HIGH similarity pairs to AVOID on the same cell:
+- APC and Alexa Fluor 647 (nearly identical signatures -- never use together)
+- BV421 and eFluor 450 / Pacific Blue / Live/Dead Violet (group: cannot be distinguished)
+- BV510 and VioGreen / Zombie Aqua / Live/Dead Aqua (group: cannot be distinguished)
+- BV605 and Super Bright 600 (very similar)
+- BV650 and Super Bright 645 (very similar)
+- BV711 and Super Bright 702 (very similar)
+- Pacific Orange and Live/Dead Yellow (similar)
+- PE-Cy5 and PerCP-Cy5.5 (similar emission, often problematic)
+
+On a TRADITIONAL cytometer: these pairs simply cannot be used together.
+On a SPECTRAL cytometer (Aurora): many of these CAN be separated IF they are on different cell populations (not co-expressed). If co-expressed, they still create unmixing problems.
+
+Rule: Co-expressed markers -> assign fluorochromes with similarity index <0.5 to each other. Direct user to Cytek Cloud similarity viewer to verify pairs.
+
+------ STEP 4: DUMP CHANNEL ASSIGNMENT ------
+Dead cells, RBCs, granulocytes, or other unwanted lineages go in the dump channel.
+- Assign the LOWEST brightness fluorochrome available to dump (wasted signal on unwanted cells)
+- Commonly: a dim BUV or cFluor dye, or a viability dye that's spectrally simple
+- Dump should NOT share a laser with your most critical markers if avoidable
+
+------ STEP 5: VIABILITY DYE SELECTION ------
+Always required. Rules:
+- For LIVE/UNFIXED cells: use an amine-reactive viability dye (e.g., Live/Dead Fixable dyes, Zombie series) OR a membrane-impermeant nucleic acid dye (DAPI if using UV laser, 7-AAD on blue/YG laser, PI)
+- For FIXED cells: must use an amine-reactive viability dye BEFORE fixation; cannot use DAPI or PI after fixation
+- For INTRACELLULAR staining panels: amine-reactive dye before fixation is mandatory
+- Spectral note: titrate viability dyes carefully -- over-bright live/dead staining causes massive spread error on the Aurora. Nucleic acid dyes (DAPI, 7-AAD) are better behaved than amine-reactive dyes in spectral panels.
+- Common mistake: using Live/Dead Aqua and BV510 together -- they cannot be distinguished (identical signatures)
+
+------ STEP 6: TANDEM AND POLYMER DYE RULES ------
+Tandem dyes (PE-Cy7, PE-Cy5, APC-Cy7, APC-R700, PE/Dazzle, APC/Fire, BV711, BV786, etc.) work by FRET between donor and acceptor fluorophores. This makes them:
+
+PROBLEMATIC when:
+a) Fixation is required -- fixatives (especially paraformaldehyde) partially disrupt FRET, causing signal at the DONOR emission (PE or APC channel) in addition to the acceptor. This creates compensation/unmixing artifacts.
+b) Intracellular permeabilization (e.g., Foxp3 kit, BD Cytofix, Tonbo Ghost) -- same problem as fixation, often worse.
+c) Long storage or light exposure -- tandem uncoupling over time.
+
+Dyes to AVOID or use with caution when fixing/permeabilizing:
+- PE-Cy7 (PE signal bleeds through on fixation)
+- PE-Cy5 (same)
+- APC-Cy7 (APC signal bleeds through)
+- APC/Fire 750, APC/Fire 810 (polymer tandems -- more stable than Cy7s but still affected)
+- PE/Dazzle 594 (more stable, but still a tandem)
+- BV711, BV786 (Brilliant Violet polymer tandems -- relatively fixation-stable but check)
+
+More fixation-stable options for intracellular panels:
+- PE alone, APC alone, BV421, FITC, BUV dyes, PerCP-Cy5.5 (moderate), BB515
+
+Rule: If the user mentions intracellular staining (Foxp3, Ki-67, IFN-gamma, phospho-proteins, etc.) -> immediately flag this as a constraint and adjust fluorochrome recommendations accordingly.
+
+------ STEP 7: SPECTRAL-SPECIFIC CONSIDERATIONS (Aurora panels) ------
+a) Unmixing controls: every fluorochrome in the panel needs a single-color reference control. Remind users to plan these. Best options: antibody capture beads (for antibody-conjugated dyes) or cells (for viability dyes and dyes without bead capture options).
+b) Autofluorescence reference: highly autofluorescent samples (macrophages, liver cells, gut epithelium, tumor digests) benefit enormously from an unstained cell reference control for autofluorescence removal -- this is a unique advantage of spectral cytometry.
+c) Similarity check: after the user has a proposed fluorochrome list, direct them to check similarity indices in Cytek Cloud (spectrum.cytekbio.com). Flag pairs with similarity >0.7 on the same cell population.
+d) Complexity index: lower is better. A panel with complexity index <40 on the Aurora is well-designed; >60 warrants reconsideration of the fluorochrome mix.
+e) Spectral uniqueness: avoid loading the same laser region with too many dyes -- particularly the violet laser (405nm), which has the most crowding. The UV region (BUV dyes) is often underused and high-quality.
+
+------ STEP 8: TRADITIONAL PANEL CONSIDERATIONS (Penteon, Fortessa) ------
+a) Compensation is required -- more fluorochromes = more compensation controls = more beads needed
+b) Hard rule: never use two dyes with >50% spillover into each other unless one is in the dump channel
+b) Limit of ~15-18 colors on Fortessa; ~25-30 on Penteon
+c) Traditional panels are simpler to troubleshoot and have lower reagent cost for small panels
+d) For simple panels (<10 markers) with well-characterized cell populations, traditional is often the better choice: faster, cheaper, easier analysis
+
+------ STEP 9: PANEL SIZE ESCALATION THRESHOLDS ------
+Use these to manage scope and trigger consultation recommendations:
+- 1-8 markers: straightforward; user can likely design without help. Point to FluoroFinder.
+- 9-15 markers: moderate complexity; walk through brightness matching and co-expression rules. FluoroFinder for traditional; Cytek Cloud for spectral.
+- 16-25 markers: significant complexity; emphasize similarity checking; recommend staff consultation before purchasing antibodies.
+- 26+ markers: high complexity; strongly recommend staff consultation. These panels take weeks to validate.
+
+=== ANALYSIS PATHWAY GUIDANCE ===
+
+WHEN TO RECOMMEND OMIQ:
+- Any panel >8 colors
+- Discovery/exploratory experiment (don't know what populations to expect)
+- Immune profiling with multiple subsets
+- Any use of UMAP, t-SNE, FlowSOM, or Phenograph
+- Publication-quality high-dimensional analysis
+- Clinical or longitudinal datasets
+
+WHEN FLOWJO IS SUFFICIENT:
+- Simple panels (<=8 colors) with known, well-defined populations
+- Teaching or QC experiments
+- Users who need to share FCS analysis with collaborators already using FlowJo
+
+HIGH-DIMENSIONAL METHODS -- when to mention which:
+- UMAP: dimensionality reduction for visualization; good for exploring structure in high-parameter data; tell users UMAP is in OMIQ
+- t-SNE: similar to UMAP; more computationally intensive; preserves local structure well; also in OMIQ
+- FlowSOM: clustering algorithm; assigns cells to nodes on a self-organizing map; great for identifying populations without manual gating; available in OMIQ and R/Bioconductor
+- Phenograph: graph-based clustering; excellent for rare populations; available in OMIQ
+- Recommendation order: start with UMAP visualization -> use FlowSOM or Phenograph to cluster -> confirm clusters with manual gating on key markers
+
+ANALYSIS WORKSTATION (BSLC R018):
+Available software: FlowJo, SpectroFlo (for Aurora QC and compensation/unmixing setup), NovoExpress (for Attune), IDEAS (for ImageStream)
+OMIQ is cloud-based -- no workstation needed, access via browser
+
+=== CONSULTATION TRIGGERS ===
+Always recommend staff consultation if ANY of the following:
+- Panel >15 markers (first panel for this cell type)
+- Sort of rare population (<1% of parent gate)
+- Precious/irreplaceable sample
+- BSL2+ material
+- Novel cell type or tissue not commonly run at CAT
+- Intracellular staining + >12 markers
+- User has no prior flow cytometry experience
+- Sort for downstream sequencing (single-cell RNA-seq, ATAC-seq) -- cell viability is critical
+
+Booking: Stratocore scheduling system (stratocore.com -- CAT is listed)
+Email: ucflow@uchicago.edu
+
+=== RESPONSE FORMAT RULES ===
+- Keep responses to 3-5 sentences for questions/clarifications
+- For recommendations, lead with the instrument name first, then rationale (2-3 sentences max)
+- For panel design advice, use a short numbered list ONLY when giving multiple simultaneous rules; otherwise prose
+- When giving a marker-to-tier assignment, format it as: "CD25 (low expression) -> bright tier (PE, BV421, or BUV496)"
+- When flagging a problem, say what it is and what to do about it in the same sentence
+- End every response with either: a follow-up question to advance the conversation, OR a concrete next step the user can take right now
+- Never hedge with "you might want to consider possibly" -- be direct and confident
+- If the user mentions something that contradicts best practice, correct it kindly and explain why
+`;
+
+  var chatEl   = document.getElementById('cat-chat');
+  var chipsEl  = document.getElementById('cat-chips');
+  var inputEl  = document.getElementById('cat-input');
+  var sendEl   = document.getElementById('cat-send');
+  var badgeEl  = document.getElementById('cat-badge');
+  var limitEl  = document.getElementById('cat-limit');
+
+  function updateBadge() {
+    var r = MAX_EX - exCount;
+    badgeEl.textContent = r + ' exchange' + (r !== 1 ? 's' : '') + ' remaining';
+    if (r <= 3) badgeEl.style.background = 'rgba(230,200,74,.35)';
+    if (r <= 0) badgeEl.style.background = 'rgba(220,80,80,.35)';
+  }
+
+  function addMsg(role, text) {
+    var d = document.createElement('div');
+    d.className = 'cat-msg ' + (role === 'user' ? 'cat-user' : 'cat-bot');
+    d.innerHTML = '<div class="cat-av">' + (role === 'user' ? 'You' : 'CAT') + '</div>' +
+                  '<div class="cat-bubble">' + text.replace(/
+/g, '<br>') + '</div>';
+    chatEl.appendChild(d);
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+
+  function showTyping() {
+    var d = document.createElement('div');
+    d.className = 'cat-msg cat-bot'; d.id = 'cat-typing';
+    d.innerHTML = '<div class="cat-av">CAT</div><div class="cat-bubble"><div class="cat-typing"><div class="cat-dot"></div><div class="cat-dot"></div><div class="cat-dot"></div></div></div>';
+    chatEl.appendChild(d);
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+
+  function hideTyping() {
+    var t = document.getElementById('cat-typing');
+    if (t) t.remove();
+  }
+
+  function setChips(arr) {
+    chipsEl.innerHTML = '';
+    arr.forEach(function(c) {
+      var b = document.createElement('button');
+      b.className = 'cat-chip'; b.textContent = c;
+      b.onclick = function() { inputEl.value = c; send(); };
+      chipsEl.appendChild(b);
+    });
+  }
+
+  function autoChips(reply) {
+    var r = reply.toLowerCase();
+    if (r.indexOf('sort') !== -1 && r.indexOf('need') !== -1) {
+      setChips(['Yes, I need to sort cells', 'No, analysis only']);
+    } else if (r.indexOf('how many') !== -1 || r.indexOf('markers') !== -1 || r.indexOf('parameters') !== -1) {
+      setChips(['1-8 markers', '9-15 markers', '16-30 markers', '30+ markers']);
+    } else if (r.indexOf('bsl') !== -1 || r.indexOf('biosafety') !== -1 || r.indexOf('sterile') !== -1) {
+      setChips(['BSL1 only', 'BSL2 samples', 'Need sterile sort output']);
+    } else if (r.indexOf('intracellular') !== -1 || r.indexOf('fix') !== -1 || r.indexOf('perm') !== -1) {
+      setChips(['Yes, requires fixation/permeabilization', 'No, surface staining only']);
+    } else if (r.indexOf('expression') !== -1 || r.indexOf('brightness') !== -1 || r.indexOf('dim') !== -1) {
+      setChips(['High expression', 'Low / dim expression', 'Not sure']);
+    } else if (r.indexOf('omiq') !== -1 || r.indexOf('flowjo') !== -1 || r.indexOf('analysis') !== -1) {
+      setChips(['Tell me more about OMIQ', 'What high-dimensional methods should I use?']);
+    } else if (r.indexOf('stratocore') !== -1 || r.indexOf('book') !== -1 || r.indexOf('schedule') !== -1) {
+      setChips(['How do I get trained on this instrument?', 'I have another question about my panel']);
+    }
+  }
+
+  function lockInput() {
+    sendEl.disabled = true;
+    inputEl.disabled = true;
+    inputEl.placeholder = 'Session limit reached.';
+    limitEl.style.display = 'block';
+    chipsEl.innerHTML = '';
+  }
+
+  async function send() {
+    var text = inputEl.value.trim();
+    if (!text || busy) return;
+    if (exCount >= MAX_EX) { lockInput(); return; }
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    busy = true; sendEl.disabled = true;
+    chipsEl.innerHTML = '';
+    addMsg('user', text);
+    msgs.push({ role: 'user', content: text });
+    showTyping();
+    try {
+      var res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-request-allow-browser': 'true'
+        },
+        body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 600, system: SYSTEM, messages: msgs })
+      });
+      var data = await res.json();
+      hideTyping();
+      if (data.error) {
+        addMsg('bot', 'Sorry, something went wrong (' + data.error.type + '). Please try again or email ucflow@uchicago.edu.');
+      } else {
+        var reply = (data.content || []).filter(function(b){return b.type==='text';})[0];
+        reply = reply ? reply.text : 'Sorry, no response received. Please try again.';
+        addMsg('bot', reply);
+        msgs.push({ role: 'assistant', content: reply });
+        exCount++;
+        updateBadge();
+        autoChips(reply);
+        if (exCount >= MAX_EX) lockInput();
+      }
+    } catch(e) {
+      hideTyping();
+      addMsg('bot', 'Connection error. Please check your network and try again.');
+    }
+    busy = false;
+    if (exCount < MAX_EX) sendEl.disabled = false;
+    inputEl.focus();
+  }
+
+  window.catReset = function() {
+    msgs = []; exCount = 0; busy = false;
+    chatEl.innerHTML = ''; chipsEl.innerHTML = '';
+    limitEl.style.display = 'none';
+    inputEl.disabled = false;
+    inputEl.placeholder = 'Describe your experiment or ask a question...';
+    sendEl.disabled = false;
+    updateBadge();
+    init();
+  };
+
+  sendEl.addEventListener('click', send);
+  inputEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  });
+  inputEl.addEventListener('input', function() {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
+  });
+
+  async function init() {
+    busy = true; sendEl.disabled = true;
+    showTyping();
+    try {
+      var res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-request-allow-browser': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6', max_tokens: 300, system: SYSTEM,
+          messages: [{ role: 'user', content: 'Hello, I need help planning a flow cytometry experiment.' }]
+        })
+      });
+      var data = await res.json();
+      hideTyping();
+      var reply = (data.content || []).filter(function(b){return b.type==='text';})[0];
+      reply = reply ? reply.text : "Hi! I'm here to help you plan your experiment at the CAT Facility. What are you trying to do -- analyze cells, sort them, or measure secreted proteins?";
+      addMsg('bot', reply);
+      msgs.push({ role: 'assistant', content: reply });
+    } catch(e) {
+      hideTyping();
+      var fallback = "Hi! I'm here to help you choose the right instrument, design your panel, and plan your analysis. What are you trying to do?";
+      addMsg('bot', fallback);
+      msgs.push({ role: 'assistant', content: fallback });
+    }
+    setChips(['I need to sort cells', 'I need to analyze cells', 'I\'m not sure where to start']);
+    busy = false; sendEl.disabled = false;
+    updateBadge();
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
